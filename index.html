@@ -949,42 +949,6 @@ function pintaAuth(){
   const f=$("#aForm").querySelector("input");if(f)f.focus();
 }
 function authErr(m){const e=$("#aErr");if(e)e.innerHTML=`<div class="auth-err">${esc(m)}</div>`}
-async function crearCuenta(){
-  const nom=$("#aNom").value.trim(),ciu=$("#aCiu").value.trim(),mail=$("#aMail").value.trim().toLowerCase(),pw=$("#aPw").value;
-  if(!nom)return authErr("Escribe tu nombre.");
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail))return authErr("Ese correo no parece válido.");
-  if(pw.length<6)return authErr("La contraseña necesita al menos 6 caracteres.");
-  const cs=cuentas();
-  if(cs.some(c=>c.mail===mail))return authErr("Ya existe una cuenta con ese correo. Entra con tu contraseña.");
-  const salt=uid()+uid(),c={id:uid(),mail,nombre:nom,ciudad:ciu||"Lima",salt,pw:await hash(pw,salt),demo:false,creada:iso(HOY)};
-  cs.push(c);LS.set(K.cuentas,cs);
-  entrarComo(c);toast(`Bienvenido, ${nom.split(" ")[0]}. Agrega tu primer cliente.`);
-}
-async function entrarCuenta(){
-  const mail=$("#aMail").value.trim().toLowerCase(),pw=$("#aPw").value;
-  const c=cuentas().find(x=>x.mail===mail);
-  if(!c)return authErr("No encontramos una cuenta con ese correo.");
-  if(await hash(pw,c.salt)!==c.pw)return authErr("Contraseña incorrecta.");
-  entrarComo(c);toast(`Hola de nuevo, ${c.nombre.split(" ")[0]}.`);
-}
-function entrarDemo(){
-  const cs=cuentas();let c=cs.find(x=>x.demo);
-  if(!c){c={id:"demo",mail:"demo@ficha.pe",nombre:"Joaquín Reyes",ciudad:"Lima",salt:"",pw:"",demo:true,creada:iso(HOY)};cs.push(c);LS.set(K.cuentas,cs)}
-  entrarComo(c);toast("Cuenta de ejemplo con 12 clientes cargados.");
-}
-function entrarComo(c){
-  USER=c;LS.set(K.sesion,c.id);
-  cargar();
-  $("#auth").hidden=true;$("#app").hidden=false;$("#mnav").hidden=false;
-  vista="clientes";abierto=null;busq="";$("#q").value="";
-  todo();
-}
-function salir(){
-  USER=null;LS.del(K.sesion);S=null;
-  $("#sheet").classList.remove("on");$("#scrim").classList.remove("on");
-  $("#app").hidden=true;$("#auth").hidden=false;$("#mnav").hidden=true;
-  aTab="entrar";pintaAuth();
-}
 
 /* ================= derivados ================= */
 const plan=()=>PLANES[S.plan];
