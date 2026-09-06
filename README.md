@@ -8,6 +8,7 @@ CRM para entrenadores personales en Perú. Un solo archivo estático, sin build.
 |---|---|
 | `index.html` | La aplicación completa |
 | `supabase.sql` | El esquema de base de datos, se pega una vez |
+| `setup-supabase.cjs` | Configura Supabase solo, con un token |
 | `icon.svg` | Ícono de la app |
 | `manifest.webmanifest` | Permite instalarla en el celular |
 
@@ -20,7 +21,18 @@ Cuando pegas las claves de Supabase pasa a **modo nube**: cuentas reales,
 recuperación de contraseña y los mismos datos en celular y laptop.
 La pantalla de entrada pasa a decir "Cuenta en la nube".
 
-## Conectar Supabase, paso a paso
+## Conectar Supabase automatico (recomendado)
+
+Genera un token en https://supabase.com/dashboard/account/tokens y corre:
+
+\
+=== Ficha · configuracion de Supabase ===
+El script crea el proyecto en Sao Paulo, corre el esquema, baja la clave publica
+y la pega en index.html. Al terminar, borra el token desde esa misma pagina.
+
+Si prefieres hacerlo a mano, sigue los pasos de abajo.
+
+## Conectar Supabase a mano, paso a paso
 
 **1. Crea el proyecto.** Entra a supabase.com, New project. Elige la región
 `South America (São Paulo)`, que es la más cercana a Perú. Guarda la contraseña
