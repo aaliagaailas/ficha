@@ -21,14 +21,20 @@ Cuando pegas las claves de Supabase pasa a **modo nube**: cuentas reales,
 recuperación de contraseña y los mismos datos en celular y laptop.
 La pantalla de entrada pasa a decir "Cuenta en la nube".
 
-## Conectar Supabase automatico (recomendado)
+## Conectar Supabase automático (recomendado)
 
 Genera un token en https://supabase.com/dashboard/account/tokens y corre:
 
-\
-=== Ficha · configuracion de Supabase ===
-El script crea el proyecto en Sao Paulo, corre el esquema, baja la clave publica
-y la pega en index.html. Al terminar, borra el token desde esa misma pagina.
+```bash
+SUPABASE_TOKEN=sbp_xxx node setup-supabase.cjs
+```
+
+El script busca tu organización, crea el proyecto en São Paulo, espera a que la
+base arranque, corre el esquema con sus políticas de seguridad, baja la clave
+pública y la pega en `index.html`.
+
+El token sale de la variable de entorno y nunca toca el disco. Cuando termine,
+bórralo desde esa misma página de Supabase.
 
 Si prefieres hacerlo a mano, sigue los pasos de abajo.
 
