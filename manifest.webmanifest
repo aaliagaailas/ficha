@@ -1,0 +1,18 @@
+{
+  "name": "Ficha",
+  "short_name": "Ficha",
+  "description": "CRM para entrenadores personales",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F3F8",
+  "theme_color": "#6236FF",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
